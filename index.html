@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FastFinds - Produits populaires au Maroc</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;margin:0;padding:0;background:#f5f7fb;color:#111}
+a{text-decoration:none;color:inherit}
+header{background:#0b1226;color:#fff;padding:18px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:700;font-size:22px}
+main{max-width:1200px;margin:20px auto;padding:10px}
+h2{text-align:center;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:#fff;padding:12px;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.08);display:flex;flex-direction:column;min-height:340px}
+.card img{width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:8px}
+.card h3{margin:6px 0;font-size:16px}
+.desc{font-size:13px;color:#555;flex:1}
+.price-row{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+.price .old{text-decoration:line-through;color:#888;font-size:14px}
+.price .new{font-weight:800;font-size:16px;color:#0b7cff}
+.btn{background:#0b7cff;color:#fff;padding:8px 12px;border:none;border-radius:8px;cursor:pointer;font-weight:700}
+.btn.remove{background:#ff4d4f}
+.cart-panel{position:fixed;right:18px;bottom:18px;width:360px;max-width:92%;background:#fff;border-radius:12px;box-shadow:0 18px 48px rgba(0,0,0,.18);overflow:hidden}
+.cart-header{background:#0b7cff;color:#fff;padding:12px;display:flex;justify-content:space-between;align-items:center}
+.cart-body{padding:12px;max-height:400px;overflow:auto}
+.cart-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f0f4ff}
+.cart-item img{width:56px;height:56px;border-radius:8px;object-fit:cover;margin-right:8px}
+.total-row{display:flex;justify-content:space-between;padding:12px;border-top:1px solid #f0f4ff;font-weight:800}
+footer{padding:20px;text-align:center;color:#555;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">FastFinds</div>
+<div>Paiement via WhatsApp : <strong>0665290743</strong> • Livraison GRATUITE partout au Maroc</div>
+</header>
+
+<main>
+<h2>Nos produits les plus populaires</h2>
+<div id="products" class="grid"></div>
+</main>
+
+<aside class="cart-panel">
+<div class="cart-header">
+<strong>Panier (<span id="cartCount">0</span>)</strong>
+<button class="btn remove" onclick="clearCart()">Vider</button>
+</div>
+<div class="cart-body" id="cartBody">
+<div>Votre panier est vide</div>
+</div>
+<div class="total-row">
+<div>Total</div>
+<div id="cartTotal">0 MAD</div>
+</div>
+<button class="btn" onclick="checkout()">Commander via WhatsApp</button>
+</aside>
+
+<footer>
+© 2025 FastFinds - Livraison GRATUITE partout au Maroc garantie.
+</footer>
+
+<script>
+const WHATSAPP_NUMBER = "2126650743";
+
+// Produits : prix Aliexpress +80, prix de base = prix site + 60
+const products = [
+{id:1,name:"Mini ventilateur USB",desc:"Rechargeable, portable et silencieux. Livraison gratuite !",price:20+80,oldPrice:(20+80)+60,img:"images/fan.jpg"},
+{id:2,name:"Lampe LED de bureau",desc:"Éclairage doux et pratique. Livraison gratuite !",price:30+80,oldPrice:(30+80)+60,img:"images/lamp.jpg"},
+{id:3,name:"Support téléphone voiture",desc:"Rotation 360°, facile à installer. Livraison gratuite !",price:25+80,oldPrice:(25+80)+60,img:"images/holder.jpg"}
+];
+
+let cart = JSON.parse(localStorage.getItem('shop_cart_v1') || "[]");
+function formatMAD(n){ return n.toLocaleString('fr-FR')+" MAD"; }
+
+function renderProducts(){
+const container=document.getElementById('products');
+container.innerHTML="";
+products.forEach(p=>{
+const card=document.createElement('div');
+card.className="card";
+card.innerHTML=`<img src="${p.img}" alt="${p.name}">
+<h3>${p.name}</h3>
+<div class="desc">${p.desc}</div>
+<div class="price-row">
+<div class="price"><span class="old">${formatMAD(p.oldPrice)}</span> <span class="new">${formatMAD(p.price)}</span></div>
+<button class="btn" onclick="addToCart(${p.id})">Ajouter</button>
+</div>`;
+container.appendChild(card);
+});
+}
+
+function saveCart(){ localStorage.setItem('shop_cart_v1',JSON.stringify(cart)); renderCart(); }
+function addToCart(id){ const prod=products.find(p=>p.id===id); const found=cart.find(c=>c.id===id); if(found) found.qty++; else cart.push({id:prod.id,name:prod.name,price:prod.price,qty:1}); saveCart(); }
+function removeFromCart(id){ cart=cart.filter(c=>c.id!==id); saveCart(); }
+function clearCart(){ cart=[]; saveCart(); }
+function cartTotal(){ return cart.reduce((s,i)=>s+i.price*i.qty,0); }
+
+function renderCart(){
+const body=document.getElementById('cartBody');
+const count=document.getElementById('cartCount');
+const total=document.getElementById('cartTotal');
+count.textContent=cart.reduce((s,i)=>s+i.qty,0);
+total.textContent=formatMAD(cartTotal());
+body.innerHTML="";
+if(cart.length===0){body.innerHTML='Votre panier est vide';return;}
+cart.forEach(i=>{
+const row=document.createElement('div');
+row.className="cart-item";
+row.innerHTML=`<div style="flex:1"><img src="${products.find(p=>p.id===i.id).img}"> ${i.name} x${i.qty} - ${formatMAD(i.price*i.qty)}</div>
+<button class="btn remove" onclick="removeFromCart(${i.id})">Supprimer</button>`;
+body.appendChild(row);
+});
+}
+
+function checkout(){
+if(cart.length===0){alert("Le panier est vide");return;}
+const lines=["Nouvelle commande - FastFinds"];
+cart.forEach(i=>lines.push(`${i.name} x${i.qty} — ${formatMAD(i.price*i.qty)}`));
+lines.push("Total: "+formatMAD(cartTotal()));
+const url="https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(lines.join("\n"));
+window.open(url,"_blank");
+}
+
+renderProducts();
+renderCart();
+</script>
+</body>
+</html>
