@@ -42,18 +42,18 @@ header { background:#111; color:white; padding:20px; text-align:center; font-siz
 <script>
 // 12 PRODUITS AUTO LES PLUS VENDUS
 const products = [
-{ name:"Support Téléphone Voiture", price:90, basePrice:140, img:"https://i.imgur.com/YU5QeTt.jpeg" },
-{ name:"Désodorisant Voiture Premium", price:80, basePrice:130, img:"https://i.imgur.com/r6XprKQ.jpeg" },
-{ name:"Tapis de Voiture Universels", price:110, basePrice:160, img:"https://i.imgur.com/ABWvPMn.jpeg" },
-{ name:"Caméra de Recul HD", price:130, basePrice:180, img:"https://i.imgur.com/kAE8wQt.jpeg" },
-{ name:"Organisateur Siège Arrière", price:85, basePrice:135, img:"https://i.imgur.com/RDtgHZP.jpeg" },
-{ name:"Chargeur Allume-Cigare Fast", price:75, basePrice:125, img:"https://i.imgur.com/3QqAlkJ.jpeg" },
-{ name:"LED Intérieur Voiture", price:90, basePrice:140, img:"https://i.imgur.com/9bZxY9E.jpeg" },
-{ name:"Housse Siège Voiture Luxe", price:140, basePrice:190, img:"https://i.imgur.com/WWxFW4Z.jpeg" },
-{ name:"Kit Nettoyage Voiture", price:80, basePrice:130, img:"https://i.imgur.com/gefvHjF.jpeg" },
-{ name:"Caméra Dashcam Mini", price:150, basePrice:200, img:"https://i.imgur.com/iWQhYEA.jpeg" },
+{ name:"Support Téléphone Voiture", price:90, basePrice:140, img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEixNTO78v1QdCRgBGMO9Ln9iH2wGB-JBwjKc6NQirUDEglu2k59nU1aoep3NP7F_MMUDXQf8Nw1HBqpGjStZW4o-zT74eL0WyPu8HOPJsGDlKqySmlJFM6RfHGvETxKTHJvXR2KjVnod5wJa0NLBmpl91IS7ynTtOXhmyhk99TOaHbx6vRNMLFw-xY5vXuO/s320/IMG_1301.jpeg" },
+{ name:"Désodorisant Voiture Premium", price:80, basePrice:130, img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgtMkRaWvIRsFcgC5rpGagYbhS4ms4N9bwq7WeaurieoUIKOKTuTIRuj3WToxgMs4ysR6YsiBc3yxnjcY91ZTFKiU9IQC7YudDaqzWpDfjmrOicNIWQK_30K797M164BoMilzdeyvWIiOpv8EEQSks-O-kWmEriWTXfd6bf8wsckOyI1yk5hS-IMkkwdEd8/s320/IMG_1322.jpeg" },
+{ name:"Tapis de Voiture Universels", price:110, basePrice:160, img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0e0fZCY5OERaxszWL57edAbKipB_4Iqa37ZHaoFFfv2w_jMgjxjGXLFqLbND_LyHhKfMPIRzVHUoM_GyUj22p07iuLqCujaRWZo24RIIM1fn2TwC84atVJXSm04UalJXHrP4nkkhiumrHHPC5s1t8jfC_cylT4CTTqDGPvrzHZc-56uQl26QFzmWR5T9e/s320/IMG_1323.jpeg" },
+{ name:"Caméra de Recul HD", price:130, basePrice:180, img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgChFLgwlKEMOPWVUemaLkg6AoL_qOuyPTXXENbcr85RuSibqCPlFywkUIidLbmYJlp8NZ2VNLIJXhVtFFjnFW7KZZD93b6oP2QhTBch34Z1_f8fsTjAmqb2Ik2bufnCm_t-sqSncmrShxgys5UxRloMkpxMNGRN_hQoMIayzHbBZxSb3cREzFdSTvMMW3K/s320/IMG_1324.jpeg" },
+{ name:"Organisateur Siège Arrière", price:85, basePrice:135, img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi4BCI2UAXHHF8veDs-Howchgamrt0VOAp7o_ZGxIKgCgN5duW8OlKwmFObvs0p8xEOr3A2XJGJ2Hq3EX2exVtZZf_JSUHsuekD-LCNuTBmg2F7-2NlBLA18BWDSKAu9eK9UL_Fs8MbdRvlW6FUWmoLIRv6y51pY3Mi2lQrMrjaciwoBNMTdijUXTue26Hk/s320/IMG_1325.jpeg" },
+{ name:"Chargeur Allume-Cigare Fast", price:75, basePrice:125, img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxt1PmKu8zDZ6mvgzA8b8Viz92iIPLcBpKLutTenbNrKN8tPbtOILeYz4dYGLJ1CPgdQafOZ2oiead5dvYYrlw6Yh_BIY0v4mbeD3E55YagGV15a3fWy1tj3RP37TUGJFwD9wWRmdQQz5cLciyUR2mL3lCdLHdYNcWEsHsY-13Q4JU-MWD5QLWCrOTp7oF/s320/IMG_1326.jpeg" },
+{ name:"LED Intérieur Voiture", price:90, basePrice:140, img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjVzzkeqSJQJWuCpa_UCrJaZaW8S-Akp2cmlR7H5CaahVPr-SWXMAX8RnJXlLQJJsA1EWroDzsV4cpXx8uRtTEzm9ogEOE3-QldQ_8HB3ZENw9td1yZXQWOPCSdExwOXJoRLnl1P68RJblCLSyVbcH6EcC3jyQknR4334cMx8Q4EFQtbT5s2nztR1b4jp-y/s320/IMG_1328.jpeg" },
+{ name:"Housse Siège Voiture Luxe", price:140, basePrice:190, img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh01ehMFxPfoNru_sjQ58DZIXeuZyyYZxtd59jFUbJY7bfnZP7oT-LRYTRU6hLgWkf_w23TrqK_Bc-jyKJJW67Yf07P-f19AoVgsmUM7C98vPsfCN1hlFcHZr-vb1LCcb6o3fgaf4XKtJ3x0Rt8rmNFzm9Zersw33LgHCv9dASAYHZq16u2LC5zoc9n1_NJ/s320/IMG_1329.jpeg" },
+{ name:"Kit Nettoyage Voiture", price:80, basePrice:130, img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhSekNEABrxp10w2dN63P3v9mbl1Wf3nwfNenGXVsDZGw7I9lOFXZLyp6huSE4FZIsGQbpxOCqZUNF0XhOXz_b6Ylh7NCzuqnP3XmE-O481_or0oGwWNYViArc3xOn2tnK4upFlkrXIj7_wo8dmxniPLoVX6qYAO7IZt8ZfxUWCsn9AWyVLulWNCDuoq9Uu/s320/IMG_1330.jpeg" },
+{ name:"Caméra Dashcam Mini", price:150, basePrice:200, img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgLC4W7LxDXgiPObbgMH2yMixHyUujWceSG0bdSU4YSnE0qLV4_dAyOzbDcgv5PE7e7sOv5UoydbWUgCZZM6KlIwSrV-euS7HGJVaDMVxEueSAi7BvimoxtVfSRKsj319fC4Tq1_QJNEdkG2nS0Y1c1DLB9GMBw3d-JbfpyFUg32dG2ptFsyxC9xwIzP6Pm/s320/IMG_1331.jpeg" },
 { name:"Anti-Buée Pare-Brise", price:70, basePrice:120, img:"https://i.imgur.com/YlP42zF.jpeg" },
-{ name:"Câble Démarrage Batterie", price:100, basePrice:150, img:"https://i.imgur.com/To1Lihw.jpeg" }
+{ name:"Câble Démarrage Batterie", price:100, basePrice:150, "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg3DAymaXqsPmblI6SL7X_1JCxyRBCo3wMB3rRptCOSAMd5JhiZjnuMeJPcENljaAulb4XcL-EOmha0RVCnnJVPGVybzRmHe_GayoxEBXiDmrDi4p6nCO2WCn_PsChWOEbI49Jh7HwZ8OepDUtT1Uhy6vfnpISa8q2XP3T28NxTXPGcd7Twzaptm_jSb6Ne/s320/IMG_1332.jpeg" }
 ];
 
 let cart = [];
