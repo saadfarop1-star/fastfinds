@@ -14,13 +14,15 @@ header { background:#111; color:white; padding:20px; text-align:center; font-siz
 .btn { background:#28a745; color:white; padding:10px; border:none; width:100%; border-radius:8px; cursor:pointer; font-size:15px; font-weight:bold; }
 .btn:hover { background:#218838; }
 #cart { background:white; padding:15px; margin-top:30px; border-radius:10px; box-shadow:0 0 8px #ccc; }
-.cart-item { display:flex; justify-content:space-between; margin-bottom:10px; }
+.cart-item { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:8px; }
 .cart-btn { background:red; color:white; border:none; padding:4px 10px; border-radius:6px; cursor:pointer; }
 .checkout { background:#007bff; padding:12px; color:white; border:none; width:100%; margin-top:15px; font-size:17px; border-radius:8px; }
 .checkout:hover { background:#0069d9; }
 .base-price { text-decoration:line-through; color:#888; font-size:14px; }
 .site-price { font-weight:bold; color:#111; font-size:16px; }
-.small-text { font-size:13px; color:#555; }
+.qty-control { display:flex; align-items:center; gap:5px; }
+.qty-control button { padding:3px 8px; font-size:14px; background:#ddd; border:none; border-radius:4px; cursor:pointer; }
+.qty-control input { width:40px; text-align:center; border:1px solid #ccc; border-radius:4px; padding:2px; }
 </style>
 </head>
 <body>
@@ -40,18 +42,18 @@ header { background:#111; color:white; padding:20px; text-align:center; font-siz
 <script>
 // 12 PRODUITS AUTO LES PLUS VENDUS
 const products = [
-{ name:"Support Téléphone Voiture", aliexpress:40, img:"https://i.imgur.com/YU5QeTt.jpeg" },
-{ name:"Désodorisant Voiture Premium", aliexpress:30, img:"https://i.imgur.com/r6XprKQ.jpeg" },
-{ name:"Tapis de Voiture Universels", aliexpress:60, img:"https://i.imgur.com/ABWvPMn.jpeg" },
-{ name:"Caméra de Recul HD", aliexpress:80, img:"https://i.imgur.com/kAE8wQt.jpeg" },
-{ name:"Organisateur Siège Arrière", aliexpress:35, img:"https://i.imgur.com/RDtgHZP.jpeg" },
-{ name:"Chargeur Allume-Cigare Fast", aliexpress:25, img:"https://i.imgur.com/3QqAlkJ.jpeg" },
-{ name:"LED Intérieur Voiture", aliexpress:40, img:"https://i.imgur.com/9bZxY9E.jpeg" },
-{ name:"Housse Siège Voiture Luxe", aliexpress:70, img:"https://i.imgur.com/WWxFW4Z.jpeg" },
-{ name:"Kit Nettoyage Voiture", aliexpress:30, img:"https://i.imgur.com/gefvHjF.jpeg" },
-{ name:"Caméra Dashcam Mini", aliexpress:90, img:"https://i.imgur.com/iWQhYEA.jpeg" },
-{ name:"Anti-Buée Pare-Brise", aliexpress:20, img:"https://i.imgur.com/YlP42zF.jpeg" },
-{ name:"Câble Démarrage Batterie", aliexpress:50, img:"https://i.imgur.com/To1Lihw.jpeg" }
+{ name:"Support Téléphone Voiture", price:90, basePrice:140, img:"https://i.imgur.com/YU5QeTt.jpeg" },
+{ name:"Désodorisant Voiture Premium", price:80, basePrice:130, img:"https://i.imgur.com/r6XprKQ.jpeg" },
+{ name:"Tapis de Voiture Universels", price:110, basePrice:160, img:"https://i.imgur.com/ABWvPMn.jpeg" },
+{ name:"Caméra de Recul HD", price:130, basePrice:180, img:"https://i.imgur.com/kAE8wQt.jpeg" },
+{ name:"Organisateur Siège Arrière", price:85, basePrice:135, img:"https://i.imgur.com/RDtgHZP.jpeg" },
+{ name:"Chargeur Allume-Cigare Fast", price:75, basePrice:125, img:"https://i.imgur.com/3QqAlkJ.jpeg" },
+{ name:"LED Intérieur Voiture", price:90, basePrice:140, img:"https://i.imgur.com/9bZxY9E.jpeg" },
+{ name:"Housse Siège Voiture Luxe", price:140, basePrice:190, img:"https://i.imgur.com/WWxFW4Z.jpeg" },
+{ name:"Kit Nettoyage Voiture", price:80, basePrice:130, img:"https://i.imgur.com/gefvHjF.jpeg" },
+{ name:"Caméra Dashcam Mini", price:150, basePrice:200, img:"https://i.imgur.com/iWQhYEA.jpeg" },
+{ name:"Anti-Buée Pare-Brise", price:70, basePrice:120, img:"https://i.imgur.com/YlP42zF.jpeg" },
+{ name:"Câble Démarrage Batterie", price:100, basePrice:150, img:"https://i.imgur.com/To1Lihw.jpeg" }
 ];
 
 let cart = [];
@@ -60,60 +62,70 @@ let cart = [];
 function displayProducts() {
     let html="";
     products.forEach((p,i)=>{
-        const sitePrice = p.aliexpress + 50;
-        const basePrice = sitePrice + 50;
         html+=`
         <div class="product">
             <img src="${p.img}">
             <h3>${p.name}</h3>
-            <p class="small-text">Prix AliExpress : ${p.aliexpress} DH</p>
-            <p class="base-price">Prix de base : ${basePrice} DH</p>
-            <p class="site-price">Prix sur notre site : ${sitePrice} DH</p>
+            <p class="base-price">Prix de base : ${p.basePrice} DH</p>
+            <p class="site-price">Prix : ${p.price} DH</p>
             <button class="btn" onclick="addToCart(${i})">Ajouter au panier</button>
         </div>`;
     });
     document.getElementById("product-list").innerHTML = html;
 }
 
-// AJOUT AU PANIER
+// AJOUTER AU PANIER
 function addToCart(i) {
-    const sitePrice = products[i].aliexpress + 50;
-    cart.push({name:products[i].name, price:sitePrice});
+    const existing = cart.find(item=>item.name===products[i].name);
+    if(existing){ existing.qty++; }
+    else{ cart.push({name:products[i].name, price:products[i].price, qty:1}); }
     updateCart();
 }
 
 // SUPPRIMER DU PANIER
-function removeFromCart(index) {
+function removeFromCart(index){
     cart.splice(index,1);
     updateCart();
 }
 
+// MODIFIER QUANTITÉ
+function changeQty(index, delta){
+    cart[index].qty += delta;
+    if(cart[index].qty < 1) cart[index].qty = 1;
+    updateCart();
+}
+
 // AFFICHAGE PANIER
-function updateCart() {
+function updateCart(){
     let html="";
     let total=0;
-    cart.forEach((p,i)=>{
-        total+=p.price;
+    cart.forEach((item,i)=>{
+        total += item.price * item.qty;
         html+=`
-            <div class="cart-item">
-                ${p.name} - ${p.price} DH
-                <button class="cart-btn" onclick="removeFromCart(${i})">X</button>
+        <div class="cart-item">
+            <div style="flex:1">
+                ${item.name} - ${item.price} DH
+                <div class="qty-control">
+                    <button onclick="changeQty(${i},-1)">−</button>
+                    <input type="text" value="${item.qty}" readonly>
+                    <button onclick="changeQty(${i},1)">+</button>
+                </div>
             </div>
-        `;
+            <button class="cart-btn" onclick="removeFromCart(${i})">Supprimer</button>
+        </div>`;
     });
     document.getElementById("cart-items").innerHTML = html;
     document.getElementById("total").innerText = total;
 }
 
 // CHECKOUT WhatsApp
-function checkout() {
+function checkout(){
     if(cart.length===0){ alert("Ton panier est vide."); return; }
     let message="Bonjour FastFindAuto,%0AJe souhaite commander :%0A%0A";
-    cart.forEach(p=>{
-        message+=`${encodeURIComponent(p.name)} - ${p.price} DH%0A`;
+    cart.forEach(item=>{
+        message += `${encodeURIComponent(item.name)} x${item.qty} - ${item.price*item.qty} DH%0A`;
     });
-    message+=`%0ATotal : ${cart.reduce((sum,p)=>sum+p.price,0)} DH%0A`;
-    message+=`Nom :%0AAdresse :%0ATéléphone :%0AMode de paiement souhaité :`;
+    message += `%0ATotal : ${cart.reduce((sum,i)=>sum+i.price*i.qty,0)} DH%0ANom :%0AAdresse :%0ATéléphone :%0AMode de paiement :`;
     const waNumber = "212665290743"; // 0665290743
     const url = `https://wa.me/${waNumber}?text=${message}`;
     window.open(url,"_blank");
@@ -121,6 +133,5 @@ function checkout() {
 
 displayProducts();
 </script>
-
 </body>
 </html>
