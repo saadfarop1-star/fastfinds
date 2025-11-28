@@ -3,44 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AutoGearShop – Accessoires Voiture & Gadgets</title>
-<meta name="description" content="AutoGearShop - Boutique internationale d'accessoires voiture : supports, LED, tapis auto, livraison mondiale.">
+<title>AutoGearShop – Accessoires Voiture</title>
+<meta name="description" content="Boutique internationale d'accessoires voiture : supports, LED, tapis auto, livraison mondiale.">
 <style>
-body { font-family: Arial, sans-serif; margin:0; background:#f4f4f4; }
-header { background:#111; color:white; padding:20px; text-align:center; font-size:24px; font-weight:bold; position:relative; }
-#cart-icon { position:absolute; top:20px; right:20px; cursor:pointer; font-size:28px; }
-.free-shipping { background:#28a745; color:white; text-align:center; padding:15px; font-size:18px; font-weight:bold; }
-.container { width:95%; margin:auto; margin-top:20px; }
-.products { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:20px; }
-.product { background:white; padding:15px; border-radius:10px; box-shadow:0 0 8px #ccc; text-align:center; transition:transform 0.2s; }
-.product:hover { transform:scale(1.03); }
-.product img { width:100%; border-radius:10px; }
-.btn { background:#28a745; color:white; padding:10px; border:none; width:100%; border-radius:8px; cursor:pointer; font-size:15px; font-weight:bold; }
-.btn:hover { background:#218838; }
-#cart { position:fixed; top:80px; right:20px; width:360px; max-width:90%; background:white; padding:15px; border-radius:10px; box-shadow:0 0 12px #333; z-index:1000; display:block; }
-.cart-item { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:8px; }
-.cart-btn { background:red; color:white; border:none; padding:4px 10px; border-radius:6px; cursor:pointer; }
-.checkout { background:#007bff; padding:12px; color:white; border:none; width:100%; margin-top:15px; font-size:17px; border-radius:8px; cursor:pointer; }
-.checkout:hover { background:#0069d9; }
-.base-price { text-decoration:line-through; color:#888; font-size:14px; }
-.site-price { font-weight:bold; color:#111; font-size:16px; }
-.qty-control { display:flex; align-items:center; gap:5px; margin-top:5px; }
-.qty-control button { padding:3px 8px; font-size:14px; background:#ddd; border:none; border-radius:4px; cursor:pointer; }
-.qty-control input { width:40px; text-align:center; border:1px solid #ccc; border-radius:4px; padding:2px; }
-.form-section { background:white; padding:15px; margin-top:15px; border-radius:10px; box-shadow:0 0 8px #ccc; }
-.form-section h3 { margin-bottom:10px; }
-.form-section input, .form-section textarea { width:100%; padding:8px; margin-bottom:10px; border:1px solid #ccc; border-radius:6px; }
-.payment-logos img { height:30px; margin:5px; }
-.about, .policies, .reviews { background:white; padding:15px; margin-top:20px; border-radius:10px; box-shadow:0 0 8px #ccc; }
-footer { background:#111; color:white; text-align:center; padding:20px; margin-top:20px; }
-h2,h3 { margin-top:0; }
+/* === Reset & Base === */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,sans-serif;background:#f4f4f4;}
+a{text-decoration:none;color:inherit;}
+
+/* === Header === */
+header{background:#111;color:white;padding:20px;position:relative;display:flex;justify-content:space-between;align-items:center;}
+header h1{font-size:24px;font-weight:bold;}
+#search-bar{padding:6px 10px;width:300px;border-radius:5px;border:none;}
+#cart-icon{cursor:pointer;font-size:28px;position:relative;}
+#cart-count{position:absolute;top:-8px;right:-8px;background:red;color:white;border-radius:50%;width:20px;height:20px;font-size:12px;text-align:center;line-height:20px;}
+
+/* === Banner === */
+.free-shipping{background:#28a745;color:white;text-align:center;padding:15px;font-size:18px;font-weight:bold;}
+
+/* === Container & Products === */
+.container{width:95%;margin:auto;margin-top:20px;}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+.product{background:white;padding:15px;border-radius:10px;box-shadow:0 0 8px #ccc;text-align:center;transition:all 0.3s;}
+.product:hover{transform:scale(1.03);}
+.product img{width:100%;border-radius:10px;}
+.btn{background:#28a745;color:white;padding:10px;border:none;width:100%;border-radius:8px;cursor:pointer;font-size:15px;font-weight:bold;transition:all 0.3s;}
+.btn:hover{background:#218838;transform:scale(1.05);}
+.base-price{text-decoration:line-through;color:#888;font-size:14px;}
+.site-price{font-weight:bold;color:#111;font-size:16px;}
+.label{position:absolute;top:10px;left:10px;background:red;color:white;padding:5px 8px;font-size:12px;border-radius:5px;}
+
+/* === Floating Cart === */
+#cart{position:fixed;top:80px;right:20px;width:360px;max-width:90%;background:white;padding:15px;border-radius:10px;box-shadow:0 0 12px #333;z-index:1000;display:none;transition:all 0.3s ease;}
+.cart-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;border-bottom:1px solid #eee;padding-bottom:8px;}
+.cart-btn{background:red;color:white;border:none;padding:4px 10px;border-radius:6px;cursor:pointer;}
+
+/* === Checkout & Form === */
+.checkout{background:#007bff;padding:12px;color:white;border:none;width:100%;margin-top:15px;font-size:17px;border-radius:8px;cursor:pointer;transition:all 0.3s;}
+.checkout:hover{background:#0069d9;transform:scale(1.02);}
+.form-section{background:white;padding:15px;margin-top:15px;border-radius:10px;box-shadow:0 0 8px #ccc;}
+.form-section input, .form-section textarea{width:100%;padding:8px;margin-bottom:10px;border:1px solid #ccc;border-radius:6px;}
+.payment-logos img{height:30px;margin:5px;}
+
+/* === Footer === */
+footer{background:#111;color:white;text-align:center;padding:20px;margin-top:20px;}
+
+/* === FAQ & Reviews === */
+.about, .policies, .reviews, .faq{background:white;padding:15px;margin-top:20px;border-radius:10px;box-shadow:0 0 8px #ccc;}
+h2,h3{margin-bottom:10px;}
+.faq-item{margin-bottom:10px;}
+.faq-question{font-weight:bold;cursor:pointer;transition:all 0.3s;}
+.faq-answer{display:none;margin-top:5px;color:#333;}
 </style>
 </head>
 <body>
 
 <header>
-AutoGearShop — Accessoires Voiture & Gadgets
-<span id="cart-icon" onclick="toggleCart()">🛒</span>
+<h1>AutoGearShop</h1>
+<input type="text" id="search-bar" placeholder="Rechercher un produit...">
+<div id="cart-icon" onclick="toggleCart()">🛒<span id="cart-count">0</span></div>
 </header>
 
 <div class="free-shipping">
@@ -54,7 +75,7 @@ AutoGearShop — Accessoires Voiture & Gadgets
 
 <!-- Panier flottant -->
 <div id="cart">
-<h2>🧺 Panier</h2>
+<h2>🧺 Panier <span style="cursor:pointer; float:right; font-weight:bold;" onclick="toggleCart()">✖</span></h2>
 <div id="cart-items"></div>
 <h3>Total : <span id="total">0</span> DH</h3>
 
@@ -79,15 +100,15 @@ AutoGearShop — Accessoires Voiture & Gadgets
 <button class="checkout" onclick="checkout()">Payer avec PayPal / Carte</button>
 </div>
 
-<!-- About / Policies / Reviews -->
+<!-- Sections crédibles -->
 <div class="about container">
 <h3>À propos de AutoGearShop</h3>
-<p>Nous sommes une boutique internationale spécialisée dans les accessoires voiture : support téléphone, caméra de recul, LED intérieur, organisateurs, tapis, etc. Livraison mondiale.</p>
+<p>Nous sommes une boutique internationale spécialisée dans les accessoires voiture : support téléphone, caméra de recul, LED intérieur, organisateurs, tapis, etc. Livraison mondiale et rapide.</p>
 </div>
 
 <div class="policies container">
 <h3>Politique de retour</h3>
-<p>Retour sous 30 jours après réception. Contactez-nous à <b>saadfarop1@gmail.com</b> pour tout problème.</p>
+<p>Retour sous 30 jours après réception. Contactez-nous à <b>saadfarop1@gmail.com</b> pour tout problème. Garantie satisfait ou remboursé.</p>
 </div>
 
 <div class="reviews container">
@@ -97,87 +118,139 @@ AutoGearShop — Accessoires Voiture & Gadgets
 <p>⭐⭐⭐⭐⭐ "Excellent service et suivi WhatsApp." – Ahmed, UAE</p>
 </div>
 
+<div class="faq container">
+<h3>FAQ</h3>
+<div class="faq-item">
+<div class="faq-question" onclick="toggleFAQ(this)">⯆ Comment se passe la livraison ?</div>
+<div class="faq-answer">Nous livrons dans le monde entier sous 7-15 jours ouvrables selon votre pays.</div>
+</div>
+<div class="faq-item">
+<div class="faq-question" onclick="toggleFAQ(this)">⯆ Quels sont les modes de paiement ?</div>
+<div class="faq-answer">PayPal, Carte bancaire (Visa, MasterCard, AmEx) et WhatsApp.</div>
+</div>
+<div class="faq-item">
+<div class="faq-question" onclick="toggleFAQ(this)">⯆ Puis-je retourner un produit ?</div>
+<div class="faq-answer">Oui, retour sous 30 jours après réception. Contactez-nous par email.</div>
+</div>
+<div class="faq-item">
+<div class="faq-question" onclick="toggleFAQ(this)">⯆ Les produits sont-ils garantis ?</div>
+<div class="faq-answer">Oui, tous nos produits sont originaux et testés pour la qualité.</div>
+</div>
+</div>
+
 <footer>
-Contact : saadfarop1@gmail.com | Paiement sécurisé via PayPal | Livraison mondiale
+Contact : saadfarop1@gmail.com | Paiement sécurisé via PayPal et cartes | Livraison mondiale
 </footer>
 
 <script>
-// Tous les produits
-const products = [
-  { name:"Support Téléphone Voiture", price:90, basePrice:140, img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEixNTO78v1QdCRgBGMO9Ln9iH2wGB-JBwjKc6NQirUDEglu2k59nU1aoep3NP7F_MMUDXQf8Nw1HBqpGjStZW4o-zT74eL0WyPu8HOPJsGDlKqySmlJFM6RfHGvETxKTHJvXR2KjVnod5wJa0NLBmpl91IS7ynTtOXhmyhk99TOaHbx6vRNMLFw-xY5vXuO/s320/IMG_1301.jpeg" },
-  { name:"Désodorisant Voiture Premium", price:80, basePrice:130, img:"https://blogger.googleusercontent.com/img/b/R29vXsEgtMkRaWvIRsFcgC5rpGagYbhS4ms4N9bwq7WeaurieoUIKOKTuTIRuj3WToxgMs4ysR6YsiBc3yxnjcY91ZTFKiU9IQC7YudDaqzWpDfjmrOicNIWQK_30K797M164BoMilzdeyvWIiOpv8EEQSks-O-kWmEriWTXfd6bf8wsckOyI1yk5hS-IMkkwdEd8/s320/IMG_1322.jpeg" },
-  { name:"Tapis de Voiture Universels", price:110, basePrice:160, img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0e0fZCY5OERaxszWL57edAbKipB_4Iqa37ZHaoFFfv2w_jMgjxjGXLFqLbND_LyHhKfMPIRzVHUoM_GyUj22p07iuLqCujaRWZo24RIIM1fn2TwC84atVJXSm04UalJXHrP4nkkhiumrHHPC5s1t8jfC_cylT4CTTqDGPvrzHZc-56uQl26QFzmWR5T9e/s320/IMG_1323.jpeg" },
-  { name:"Caméra de Recul HD", price:130, basePrice:180, img:"https://blogger.googleusercontent.com/img/b/R29vXsEgChFLgwlKEMOPWVUemaLkg6AoL_qOuyPTXXENbcr85RuSibqCPlFywkUIidLbmYJlp8NZ2VNLIJXhVtFFjnFW7KZZD93b6oP2QhTBch34Z1_f8fsTjAmqb2Ik2bufnCm_t-sqSncmrShxgys5UxRloMkpxMNGRN_hQoMIayzHbBZxSb3cREzFdSTvMMW3K/s320/IMG_1324.jpeg" },
-  { name:"Organisateur Siège Arrière", price:85, basePrice:135, img:"https://blogger.googleusercontent.com/img/b/R29vXsEi4BCI2UAXHHF8veDs-Howchgamrt0VOAp7o_ZGxIKgCgN5duW8OlKwmFObvs0p8xEOr3A2XJGJ2Hq3EX2exVtZZf_JSUHsuekD-LCNuTBmg2F7-2NlBLA18BWDSKAu9eK9UL_Fs8MbdRvlW6FUWmoLIRv6y51pY3Mi2lQrMrjaciwoBNMTdijUXTue26Hk/s320/IMG_1325.jpeg" },
-  { name:"Chargeur Allume-Cigare Fast", price:75, basePrice:125, img:"https://blogger.googleusercontent.com/img/b/R29vXsEjxt1PmKu8zDZ6mvgzA8b8Viz92iIPLcBpKLutTenbNrKN8tPbtOILeYz4dYGLJ1CPgdQafOZ2oiead5dvYYrlw6Yh_BIY0v4mbeD3E55YagGV15a3fWy1tj3RP37TUGJFwD9wWRmdQQz5cLciyUR2mL3lCdLHdYNcWEsHsY-13Q4JU-MWD5QLWCrOTp7oF/s320/IMG_1326.jpeg" },
-  { name:"LED Intérieur Voiture", price:90, basePrice:140, img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjVzzkeqSJQJWuCpa_UCrJaZaW8S-Akp2cmlR7H5CaahVPr-SWXMAX8RnJXlLQJJsA1EWroDzsV4cpXx8uRtTEzm9ogEOE3-QldQ_8HB3ZENw9td1yZXQWOPCSdExwOXJoRLnl1P68RJblCLSyVbcH6EcC3jyQknR4334cMx8Q4EFQtbT5s2nztR1b4jp-y/s320/IMG_1328.jpeg" },
-  { name:"Housse Siège Voiture Luxe", price:140, basePrice:190, img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh01ehMFxPfoNru_sjQ58DZIXeuZyyYZxtd59jFUbJY7bfnZP7oT-LRYTRU6hLgWkf_w23TrqK_Bc-jyKJJW67Yf07P-f19AoVgsmUM7C98vPsfCN1hlFcHZr-vb1LCcb6o3fgaf4XKtJ3x0Rt8rmNFzm9Zersw33LgHCv9dASAYHZq16u2LC5zoc9n1_NJ/s320/IMG_1329.jpeg" },
-  { name:"Kit Nettoyage Voiture", price:80, basePrice:130, img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhSekNEABrxp10w2dN63P3v9mbl1Wf3nwfNenGXVsDZGw7I9lOFXZLyp6huSE4FZIsGQbpxOCqZUNF0XhOXz_b6Ylh7NCzuqnP3XmE-O481_or0oGwWNYViArc3QOn2tnK4upFlkrXIj7_wo8dmxniPLoVX6qYAO7IZt8ZfxUWCsn9AWyVLulWNCDuoq9Uu/s320/IMG_1330.jpeg" },
-  { name:"Caméra Dashcam Mini", price:150, basePrice:200, img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgLC4W7LxDXgiPObbgMH2yMixHyUujWceSG0bdSU4YSnE0qLV4_dAyOzbDcgv5PE7e7sOv5UoydbWUgCZZM6KlIwSrV-euS7HGJVaDMVxEueSAi7BvimoxtVfSRKsj319fC4Tq1_QJNEdkG2nS0Y1c1DLB9GMBw3d-JbfpyFUg32dG2ptFsyxC9xwIzP6Pm/s320/IMG_1331.jpeg" },
-  { name:"Anti-Buée Pare-Brise", price:70, basePrice:120, img:"https://i.imgur.com/YlP42zF.jpeg" },
-  { name:"Câble Démarrage Batterie", price:100, basePrice:150, img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg3DAymaXqsPmblI6SL7X_1JCxyRBCo3wMB3rRptCOSAMd5JhiZjnuMeJPcENljaAulb4XcL-EOmha0RVCnnJVPGVybzRmHe_GayoxEBXiDmrDi4p6nCO2WCn_PsChWOEbI49Jh7HwZ8OepDUtT1Uhy6vfnpISa8q2XP3T28NxTXPGcd7Twzaptm_jSb6Ne/s320/IMG_1332.jpeg" }
-];
-
-let cart = [];
-
-// Affichage des produits
-function displayProducts() {
-    let html="";
-    products.forEach((p,i)=>{
-        html+=`
-        <div class="product">
-            <img src="${p.img}" alt="${p.name}">
-            <h3>${p.name}</h3>
-            <p class="base-price">Prix de base : ${p.basePrice} DH</p>
-            <p class="site-price">Prix : ${p.price} DH</p>
-            <button class="btn" onclick="addToCart(${i})">Ajouter au panier</button>
-        </div>`;
-    });
-    document.getElementById("product-list").innerHTML = html;
+// === Produits ===
+const products = [];
+for(let i=1;i<=20;i++){
+products.push({
+name:"Produit Auto "+i,
+price:50+ i*5,
+basePrice:80+ i*5,
+img:"https://via.placeholder.com/250x200.png?text=Produit+"+i,
+label: i%3===0?"Best Seller":""
+});
 }
 
-// Ajouter au panier
-function addToCart(i) {
-    const existing = cart.find(item=>item.name===products[i].name);
-    if(existing){ existing.qty++; }
-    else{ cart.push({name:products[i].name, price:products[i].price, qty:1}); }
-    updateCart();
+// === Cart ===
+let cart=[];
+
+// === Display Products ===
+function displayProducts(){
+let html="";
+products.forEach((p,i)=>{
+html+=`<div class="product" id="product-${i}">
+${p.label?`<div class="label">${p.label}</div>`:""}
+<img src="${p.img}" alt="${p.name}">
+<h3>${p.name}</h3>
+<p class="base-price">Prix de base : ${p.basePrice} DH</p>
+<p class="site-price">Prix : ${p.price} DH</p>
+<button class="btn" onclick="addToCart(${i})">Ajouter au panier</button>
+</div>`;
+});
+document.getElementById("product-list").innerHTML=html;
 }
 
-// Supprimer du panier
-function removeFromCart(index){ cart.splice(index,1); updateCart(); }
-
-// Modifier quantité
-function changeQty(index, delta){
-    cart[index].qty += delta;
-    if(cart[index].qty < 1) cart[index].qty = 1;
-    updateCart();
+// === Cart Functions ===
+function addToCart(i){
+const product=products[i];
+const existing=cart.find(item=>item.name===product.name);
+if(existing){ existing.qty++; } else{ cart.push({name:product.name,price:product.price,qty:1}); }
+updateCart();
+animateAddToCart(i);
 }
 
-// Mettre à jour le panier
+function removeFromCart(i){ cart.splice(i,1); updateCart(); }
+
+function changeQty(i,delta){ cart[i].qty+=delta; if(cart[i].qty<1) cart[i].qty=1; updateCart(); }
+
 function updateCart(){
-    let html="";
-    let total=0;
-    cart.forEach((item,i)=>{
-        total += item.price * item.qty;
-        html+=`
-        <div class="cart-item">
-            <div style="flex:1">
-                ${item.name} - ${item.price} DH
-                <div class="qty-control">
-                    <button onclick="changeQty(${i},-1)">−</button>
-                    <input type="text" value="${item.qty}" readonly>
-                    <button onclick="changeQty(${i},1)">+</button>
-                </div>
-            </div>
-            <button class="cart-btn" onclick="removeFromCart(${i})">Supprimer</button>
-        </div>`;
-    });
-    document.getElementById("cart-items").innerHTML = html;
-    document.getElementById("total").innerText = total;
+let html=""; let total=0;
+cart.forEach((item,i)=>{
+total+=item.price*item.qty;
+html+=`<div class="cart-item"><div style="flex:1">${item.name} - ${item.price} DH
+<div class="qty-control"><button onclick="changeQty(${i},-1)">−</button><input type="text" value="${item.qty}" readonly><button onclick="changeQty(${i},1)">+</button></div></div>
+<button class="cart-btn" onclick="removeFromCart(${i})">Supprimer</button></div>`;
+});
+document.getElementById("cart-items").innerHTML=html;
+document.getElementById("total").innerText=total;
+document.getElementById("cart-count").innerText=cart.length;
 }
 
-// Toggle panier
 function toggleCart(){
-    const cartDiv = document.getElementById("cart");
-    cartDiv.style.display = cartDiv.style.display==="none" ? "block"
+const c=document.getElementById("cart");
+c.style.display=(c.style.display==="none"||c.style.display==="")?"block":"none";
+}
+
+// === Animate Add to Cart ===
+function animateAddToCart(i){
+const productEl=document.getElementById("product-"+i);
+const cartIcon=document.getElementById("cart-icon");
+const img=document.createElement("img");
+img.src=products[i].img;
+img.style.position="fixed";
+const rect=productEl.getBoundingClientRect();
+img.style.left=rect.left+"px";
+img.style.top=rect.top+"px";
+img.style.width=rect.width+"px";
+img.style.transition="all 0.8s ease";
+document.body.appendChild(img);
+setTimeout(()=>{
+const cartRect=cartIcon.getBoundingClientRect();
+img.style.left=cartRect.left+"px";
+img.style.top=cartRect.top+"px";
+img.style.width="40px";
+img.style.opacity="0.5";
+},50);
+setTimeout(()=>{ document.body.removeChild(img); },850);
+}
+
+// === Checkout ===
+function checkout(){
+if(cart.length===0){ alert("Ton panier est vide."); return; }
+let name=document.getElementById("customer-name").value;
+let address=document.getElementById("customer-address").value;
+let email=document.getElementById("customer-email").value;
+let phone=document.getElementById("customer-phone").value;
+if(!name||!address||!email||!phone){ alert("Veuillez remplir toutes les informations de livraison."); return; }
+let message=`Bonjour AutoGearShop,%0AJe souhaite commander :%0A%0A`;
+cart.forEach(item=>{ message+=`${encodeURIComponent(item.name)} x${item.qty} - ${item.price*item.qty} DH%0A`; });
+message+=`%0ATotal : ${cart.reduce((sum,i)=>sum+i.price*i.qty,0)} DH%0ANom : ${encodeURIComponent(name)}%0AAdresse : ${encodeURIComponent(address)}%0AEmail : ${encodeURIComponent(email)}%0ATéléphone : ${encodeURIComponent(phone)}%0AMode de paiement : PayPal / Carte`;
+const waNumber="212665290743";
+window.open(`https://wa.me/${waNumber}?text=${message}`,"_blank");
+}
+
+// === FAQ Toggle ===
+function toggleFAQ(el){
+const answer=el.nextElementSibling;
+answer.style.display=(answer.style.display==="block")?"none":"block";
+}
+
+displayProducts();
+</script>
+
+</body>
+</html>
