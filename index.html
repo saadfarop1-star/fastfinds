@@ -1,252 +1,138 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AutoGearShop – Accessoires Voiture</title>
-<meta name="description" content="Boutique internationale d'accessoires voiture : supports, LED, tapis auto, livraison mondiale.">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:Arial,sans-serif;background:#f4f4f4;}
-a{text-decoration:none;color:inherit;}
-header{background:#111;color:white;padding:20px;display:flex;justify-content:space-between;align-items:center;}
-header h1{font-size:24px;font-weight:bold;}
-#search-bar{padding:6px 10px;width:300px;border-radius:5px;border:none;}
-#cart-icon{cursor:pointer;font-size:28px;position:relative;}
-#cart-count{position:absolute;top:-8px;right:-8px;background:red;color:white;border-radius:50%;width:20px;height:20px;font-size:12px;text-align:center;line-height:20px;}
-.free-shipping{background:#28a745;color:white;text-align:center;padding:15px;font-size:18px;font-weight:bold;}
-.container{width:95%;margin:auto;margin-top:20px;}
-.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
-.product{background:white;padding:15px;border-radius:10px;box-shadow:0 0 8px #ccc;text-align:center;transition:all 0.3s;position:relative;}
-.product:hover{transform:scale(1.03);}
-.product img{width:100%;border-radius:10px;}
-.btn{background:#28a745;color:white;padding:10px;border:none;width:100%;border-radius:8px;cursor:pointer;font-size:15px;font-weight:bold;transition:all 0.3s;}
-.btn:hover{background:#218838;transform:scale(1.05);}
-.base-price{text-decoration:line-through;color:#888;font-size:14px;}
-.site-price{font-weight:bold;color:#111;font-size:16px;}
-.label{position:absolute;top:10px;left:10px;background:red;color:white;padding:5px 8px;font-size:12px;border-radius:5px;}
-#cart{position:fixed;top:80px;right:20px;width:360px;max-width:90%;background:white;padding:15px;border-radius:10px;box-shadow:0 0 12px #333;z-index:1000;display:none;transition:all 0.3s ease;}
-.cart-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;border-bottom:1px solid #eee;padding-bottom:8px;}
-.cart-btn{background:red;color:white;border:none;padding:4px 10px;border-radius:6px;cursor:pointer;}
-.checkout{background:#007bff;padding:12px;color:white;border:none;width:100%;margin-top:15px;font-size:17px;border-radius:8px;cursor:pointer;transition:all 0.3s;}
-.checkout:hover{background:#0069d9;transform:scale(1.02);}
-.form-section{background:white;padding:15px;margin-top:15px;border-radius:10px;box-shadow:0 0 8px #ccc;}
-.form-section input, .form-section textarea{width:100%;padding:8px;margin-bottom:10px;border:1px solid #ccc;border-radius:6px;}
-.payment-logos img{height:30px;margin:5px;}
-footer{background:#111;color:white;text-align:center;padding:20px;margin-top:20px;}
-.about, .policies, .reviews, .faq{background:white;padding:15px;margin-top:20px;border-radius:10px;box-shadow:0 0 8px #ccc;}
-h2,h3{margin-bottom:10px;}
-.faq-item{margin-bottom:10px;}
-.faq-question{font-weight:bold;cursor:pointer;transition:all 0.3s;}
-.faq-answer{display:none;margin-top:5px;color:#333;}
-.qty-control{display:flex;align-items:center;gap:5px;margin-top:5px;}
-.qty-control button{padding:3px 8px;font-size:14px;background:#ddd;border:none;border-radius:4px;cursor:pointer;}
-.qty-control input{width:40px;text-align:center;border:1px solid #ccc;border-radius:4px;padding:2px;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastFinds - Accessoires voiture</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f9f9f9;
+        }
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            text-align: center;
+            margin: 10px 0;
+        }
+        nav a {
+            margin: 0 15px;
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        section {
+            padding: 20px;
+        }
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .product {
+            background: white;
+            border: 1px solid #ddd;
+            margin: 10px;
+            padding: 15px;
+            width: 250px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .product a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: #e67e22;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .blog-post {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 
 <header>
-<h1>AutoGearShop</h1>
-<input type="text" id="search-bar" placeholder="Rechercher un produit...">
-<div id="cart-icon" onclick="toggleCart()">🛒<span id="cart-count">0</span></div>
+    <h1>FastFinds</h1>
+    <p>Accessoires et gadgets pour voiture</p>
 </header>
 
-<div class="free-shipping">
-🚚 Livraison gratuite dans le monde entier | Free Worldwide Shipping
-</div>
+<nav>
+    <a href="#products">Produits</a>
+    <a href="#blog">Blog</a>
+    <a href="#contact">Contact</a>
+</nav>
 
-<div class="container">
-<h2>🛒 Nos Produits Populaires</h2>
-<div class="products" id="product-list"></div>
-</div>
+<section id="products">
+    <h2>Produits Populaires</h2>
+    <div class="products">
+        <div class="product">
+            <img src="https://via.placeholder.com/250x150.png?text=Support+Téléphone" alt="Support téléphone voiture">
+            <h3>Support Téléphone Voiture</h3>
+            <p>Maintient votre téléphone en toute sécurité pendant la conduite.</p>
+            <a href="TON_LIEN_AFFILIE" target="_blank">Acheter maintenant</a>
+        </div>
+        <div class="product">
+            <img src="https://via.placeholder.com/250x150.png?text=Tapis+Voiture" alt="Tapis voiture">
+            <h3>Tapis Voiture Universel</h3>
+            <p>Protégez votre voiture avec style et robustesse.</p>
+            <a href="TON_LIEN_AFFILIE" target="_blank">Acheter maintenant</a>
+        </div>
+        <div class="product">
+            <img src="https://via.placeholder.com/250x150.png?text=Chargeur+Voiture" alt="Chargeur voiture">
+            <h3>Chargeur Voiture Rapide</h3>
+            <p>Chargez vos appareils rapidement et en toute sécurité.</p>
+            <a href="TON_LIEN_AFFILIE" target="_blank">Acheter maintenant</a>
+        </div>
+    </div>
+</section>
 
-<div id="cart">
-<h2>🧺 Panier <span style="cursor:pointer; float:right; font-weight:bold;" onclick="toggleCart()">✖</span></h2>
-<div id="cart-items"></div>
-<h3>Total : <span id="total">0</span> DH</h3>
+<section id="blog">
+    <h2>Blog / Conseils</h2>
+    <div class="blog-post">
+        <h3>Top 5 accessoires indispensables pour votre voiture</h3>
+        <p>Découvrez les accessoires qui rendent vos trajets plus confortables et sécurisés...</p>
+        <a href="#products">Voir les produits</a>
+    </div>
+    <div class="blog-post">
+        <h3>Comment choisir un support téléphone pour voiture</h3>
+        <p>Un guide rapide pour choisir le support adapté à votre voiture et votre téléphone...</p>
+        <a href="#products">Voir les produits</a>
+    </div>
+</section>
 
-<div class="form-section">
-<h3>Informations de livraison</h3>
-<input type="text" id="customer-name" placeholder="Nom complet" required>
-<input type="text" id="customer-address" placeholder="Adresse complète" required>
-<input type="email" id="customer-email" placeholder="Email" required>
-<input type="text" id="customer-phone" placeholder="Téléphone" required>
-</div>
-
-<div class="form-section">
-<h3>Paiement sécurisé</h3>
-<div class="payment-logos">
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg">
-<img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg">
-<img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg">
-</div>
-</div>
-
-<button class="checkout" onclick="checkout()">Payer avec PayPal / WhatsApp</button>
-</div>
-
-<div id="social-proof" style="position:fixed;bottom:20px;left:20px;background:#fffae6;color:#333;padding:10px 15px;border-radius:8px;box-shadow:0 0 8px #aaa;font-weight:bold;display:none;z-index:10000;"></div>
-
-<div class="about container">
-<h3>À propos de AutoGearShop</h3>
-<p>Nous sommes une boutique internationale spécialisée dans les accessoires voiture : support téléphone, caméra de recul, LED intérieur, organisateurs, tapis, etc. Livraison mondiale et rapide.</p>
-</div>
-
-<div class="policies container">
-<h3>Politique de retour</h3>
-<p>Retour sous 30 jours après réception. Contactez-nous à <b>saadfarop1@gmail.com</b> pour tout problème. Garantie satisfait ou remboursé.</p>
-</div>
-
-<div class="reviews container">
-<h3>Avis clients</h3>
-<p>⭐⭐⭐⭐⭐ "Produit arrivé rapidement, très satisfait!" – John, USA</p>
-<p>⭐⭐⭐⭐⭐ "Supports téléphone de qualité, livraison parfaite." – Marie, France</p>
-<p>⭐⭐⭐⭐⭐ "Excellent service et suivi WhatsApp." – Ahmed, UAE</p>
-</div>
-
-<div class="faq container">
-<h3>FAQ</h3>
-<div class="faq-item">
-<div class="faq-question" onclick="toggleFAQ(this)">⯆ Comment se passe la livraison ?</div>
-<div class="faq-answer">Nous livrons dans le monde entier sous 7-15 jours ouvrables selon votre pays.</div>
-</div>
-<div class="faq-item">
-<div class="faq-question" onclick="toggleFAQ(this)">⯆ Quels sont les modes de paiement ?</div>
-<div class="faq-answer">PayPal, Carte bancaire (Visa, MasterCard, AmEx) et WhatsApp.</div>
-</div>
-<div class="faq-item">
-<div class="faq-question" onclick="toggleFAQ(this)">⯆ Puis-je retourner un produit ?</div>
-<div class="faq-answer">Oui, retour sous 30 jours après réception. Contactez-nous par email.</div>
-</div>
-<div class="faq-item">
-<div class="faq-question" onclick="toggleFAQ(this)">⯆ Les produits sont-ils garantis ?</div>
-<div class="faq-answer">Oui, tous nos produits sont originaux et testés pour la qualité.</div>
-</div>
-</div>
+<section id="contact">
+    <h2>Contact / À propos</h2>
+    <p>FastFinds est dédié aux passionnés de voiture et propose des accessoires pratiques et fiables.</p>
+    <p>Contactez-nous : <a href="mailto:contact@fastfinds.com">contact@fastfinds.com</a></p>
+</section>
 
 <footer>
-Contact : saadfarop1@gmail.com | Paiement sécurisé via PayPal et cartes | Livraison mondiale
+    <p>&copy; 2025 FastFinds. Tous droits réservés.</p>
 </footer>
-
-<script>
-// === Produits ===
-const products = [];
-for(let i=1;i<=20;i++){
-products.push({
-name:"Produit Auto "+i,
-price:50+ i*5,
-basePrice:80+ i*5,
-img:"https://via.placeholder.com/250x200.png?text=Produit+"+i,
-label: i%3===0?"Best Seller":""
-});
-}
-
-// === Cart ===
-let cart=[];
-
-// === Display Products ===
-function displayProducts(){
-let html="";
-products.forEach((p,i)=>{
-html+=`<div class="product" id="product-${i}">
-${p.label?`<div class="label">${p.label}</div>`:""}
-<img src="${p.img}" alt="${p.name}">
-<h3>${p.name}</h3>
-<p class="base-price">Prix de base : ${p.basePrice} DH</p>
-<p class="site-price">Prix : ${p.price} DH</p>
-<button class="btn" onclick="addToCart(${i})">Ajouter au panier</button>
-</div>`;
-});
-document.getElementById("product-list").innerHTML=html;
-}
-
-// === Cart Functions ===
-function addToCart(i){
-const product=products[i];
-const existing=cart.find(item=>item.name===product.name);
-if(existing){ existing.qty++; } else{ cart.push({name:product.name,price:product.price,qty:1}); }
-updateCart();
-animateAddToCart(i);
-}
-
-function removeFromCart(i){ cart.splice(i,1); updateCart(); }
-function changeQty(i,delta){ cart[i].qty+=delta; if(cart[i].qty<1) cart[i].qty=1; updateCart(); }
-function updateCart(){
-let html=""; let total=0;
-cart.forEach((item,i)=>{
-total+=item.price*item.qty;
-html+=`<div class="cart-item"><div style="flex:1">${item.name} - ${item.price} DH
-<div class="qty-control"><button onclick="changeQty(${i},-1)">−</button><input type="text" value="${item.qty}" readonly><button onclick="changeQty(${i},1)">+</button></div></div>
-<button class="cart-btn" onclick="removeFromCart(${i})">Supprimer</button></div>`;
-});
-document.getElementById("cart-items").innerHTML=html;
-document.getElementById("total").innerText=total;
-document.getElementById("cart-count").innerText=cart.length;
-}
-function toggleCart(){
-const c=document.getElementById("cart");
-c.style.display=(c.style.display==="none"||c.style.display==="")?"block":"none";
-}
-
-// === Animate Add to Cart ===
-function animateAddToCart(i){
-const productEl=document.getElementById("product-"+i);
-const cartIcon=document.getElementById("cart-icon");
-const img=document.createElement("img");
-img.src=products[i].img;
-img.style.position="fixed";
-const rect=productEl.getBoundingClientRect();
-img.style.left=rect.left+"px";
-img.style.top=rect.top+"px";
-img.style.width=rect.width+"px";
-img.style.transition="all 0.8s ease";
-document.body.appendChild(img);
-setTimeout(()=>{
-const cartRect=cartIcon.getBoundingClientRect();
-img.style.left=cartRect.left+"px";
-img.style.top=cartRect.top+"px";
-img.style.width="40px";
-img.style.opacity="0.5";
-},50);
-setTimeout(()=>{ document.body.removeChild(img); },850);
-}
-
-// === Checkout ===
-function checkout(){
-if(cart.length===0){ alert("Ton panier est vide."); return; }
-
-let name=document.getElementById("customer-name").value;
-let address=document.getElementById("customer-address").value;
-let email=document.getElementById("customer-email").value;
-let phone=document.getElementById("customer-phone").value;
-if(!name||!address||!email||!phone){ alert("Veuillez remplir toutes les informations."); return; }
-
-// WhatsApp
-let message=`Bonjour AutoGearShop,%0AJe souhaite commander :%0A%0A`;
-cart.forEach(item=>{ message+=`${encodeURIComponent(item.name)} x${item.qty} - ${item.price*item.qty} DH%0A`; });
-message+=`%0ATotal : ${cart.reduce((sum,i)=>sum+i.price*i.qty,0)} DH%0ANom : ${encodeURIComponent(name)}%0AAdresse : ${encodeURIComponent(address)}%0AEmail : ${encodeURIComponent(email)}%0ATéléphone : ${encodeURIComponent(phone)}%0AMode de paiement : WhatsApp / PayPal`;
-const waNumber="212665290743";
-window.open(`https://wa.me/${waNumber}?text=${message}`,"_blank");
-
-// PayPal
-const paypalEmail="saadelhaoul0@gmail.com";
-const totalAmount=cart.reduce((sum,i)=>sum+i.price*i.qty,0);
-const paypalLink=`https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=${paypalEmail}&currency_code=MAD&amount=${totalAmount}&item_name=Commande AutoGearShop`;
-window.open(paypalLink,"_blank");
-}
-
-// === FAQ Toggle ===
-function toggleFAQ(el){ const answer=el.nextElementSibling; answer.style.display=(answer.style.display==="block")?"none":"block"; }
-
-// === Social proof ===
-const socialMessages = ["5 personnes achètent ceci en ce moment !","Dernière pièce en stock !","Stock limité, commandez vite !","Produit populaire aujourd'hui !"];
-function showSocialProof(){ const el=document.getElementById("social-proof"); el.innerText = socialMessages[Math.floor(Math.random()*socialMessages.length)]; el.style.display="block"; setTimeout(()=>{ el.style.display="none"; },4000);}
-setInterval(showSocialProof,8000);
-
-displayProducts();
-</script>
 
 </body>
 </html>
